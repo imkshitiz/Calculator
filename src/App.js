@@ -1,25 +1,45 @@
-import logo from './logo.svg';
-import './App.css';
+import Display from "./components/Display";
+import { useState } from "react";
+import Buttonscontainer from "./components/Buttonscontainer";
+
+
+
+
+import "./styles/App.css";
+import "./styles/display.css";
+import "./styles/buttoncontainer.css"
+
+
 
 function App() {
+
+let [calval,setCalval] = useState("");
+
+const onButtonClick = (buttonText) => {
+  if(buttonText === "C"){
+    setCalval("");
+
+  }else if (buttonText === "="){
+    const result = eval(calval);
+    setCalval(result);
+
+  }else {
+    const newDisplayValue = calval + buttonText;
+    setCalval(newDisplayValue);
+  }
+}
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+     <div>
+      <h1>Calculator</h1>
+    <div className="calculator">
+      <Display DisplayValue={calval} />
+      <Buttonscontainer onButtonClick={onButtonClick} />
     </div>
-  );
+    </div>
+  )
+    
+  
 }
 
 export default App;
